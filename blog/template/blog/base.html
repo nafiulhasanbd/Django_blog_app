@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>BLOG</title>
+    {# bootstrap #}
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    {# medium editor  #}
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+    {# fontawesome  #}
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    {# google font #}
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/blog.css' %}">
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="{% url 'blog:post_list' %}">Blog</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="{% url 'blog:about' %}">About</a></li>
+          {# <li><a href="#">Page 1</a></li>
+          <li><a href="#">Page 2</a></li> #}
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          {% if user.is_authenticated %}
+              <li> <a href="{% url 'blog:post_new' %}">New Post</a> </li>
+              <li> <a href="{% url 'blog:post_draft_list' %}">Draft</a> </li>
+              <li> <a href="{% url 'logout' %}">logout</a> </li>
+              <li> <a href="#">{{user.name}}</a> </li>
+          {% else %}
+            <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+           {# <li><a href="{% url 'signup' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> #}
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+      <div class="content container">
+        {% block body_block %}
+
+
+        {% endblock %}
+
+      </div>
+
+
+{# bootstrap script  #}
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+{# medium script #}
+<script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+  </body>
+</html>
